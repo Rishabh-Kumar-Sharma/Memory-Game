@@ -1,0 +1,99 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: rgb(240, 243, 245);
+  display: flex; /* Set display to flex on body */
+  flex-direction: column; /* Align children in a column */
+  min-height: 100vh; /* Make body full height of the viewport */
+}
+
+.parent-container {
+  flex-grow: 1; /* Allow parent-container to grow and fill space */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.box:hover {
+  cursor: pointer;
+}
+
+.box-initial {
+  transition: background-color 0.5s ease-in-out;
+  background-color: rgb(208, 212, 214);
+  color: rgb(208, 212, 214);
+}
+
+.box-click {
+  transition: background-color 0.5s ease-in-out;
+  background-color: blue;
+  color: white;
+}
+
+.box-correct {
+  background-color: rgb(37, 164, 37);
+  color: white;
+}
+
+h1 {
+  text-align: center;
+  padding: 2px;
+}
+
+#inp {
+  padding-top: 10px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.d-none {
+  display: none;
+}
+
+.btn {
+  background-color: rgb(77, 200, 77);
+  color: white;
+  width: 60px;
+  border-radius: 10px;
+  margin-bottom: 2px;
+  height: 30px;
+}
+
+.inp-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn-submit {
+  background-color: rgb(29, 137, 238);
+  color: white;
+  border-radius: 10px;
+  height: 30px;
+  width: 50px;
+  &:hover {
+    cursor:pointer;
+    background-color: blue;
+  }
+}
+
+.btn:hover {
+  cursor: pointer;
+  background-color: rgb(50, 150, 50);
+}
+
+footer {
+  background-color: rgb(89, 26, 26);
+  color: white;
+  border: 2px solid black;
+  width: 100%;
+  padding: 10px; /* Add some padding for better spacing */
+  text-align: center; /* Center align footer text */
+}
