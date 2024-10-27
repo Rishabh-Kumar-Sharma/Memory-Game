@@ -41,14 +41,13 @@ var c = 0;
 
 var fillGrid = (arr, n) => {
   container.innerHTML = "";
-  container.style.padding = "2px 20px";
   container.style.display = "grid";
   container.style.gridTemplateRows = `repeat(${n},auto)`;
   container.style.gridTemplateColumns = `repeat(${n},auto)`;
   container.style.gap = "2px";
   container.style.aspectRatio = "1";
   container.style.flexGrow = "1";
-  container.style.minWidth = "30%";
+  container.style.width = "auto";
 
   let obj = {};
   let posObj = {};
@@ -67,8 +66,6 @@ var fillGrid = (arr, n) => {
       box.style.display = "flex";
       box.style.alignItems = "center";
       box.style.justifyContent = "center";
-      box.style.width = "100%";
-      box.style.padding = "2px";
       box.style.borderRadius = "10px";
       box.style.userSelect = "none";
       box.className = "box-initial";
@@ -125,6 +122,7 @@ var resetGame = () => {
 };
 
 inp.addEventListener("click", (e) => {
+  document.querySelector(".winner-section").classList.add("d-none");
   counter.innerText = c = 0;
   let m = parseInt(inpt.value, 10);
   try {
