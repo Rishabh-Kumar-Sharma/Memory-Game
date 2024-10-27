@@ -41,13 +41,14 @@ var c = 0;
 
 var fillGrid = (arr, n) => {
   container.innerHTML = "";
-  container.style.padding = "10px";
+  container.style.padding = "2px 20px";
   container.style.display = "grid";
   container.style.gridTemplateRows = `repeat(${n},auto)`;
   container.style.gridTemplateColumns = `repeat(${n},auto)`;
   container.style.gap = "2px";
-  container.style.width = "30%";
   container.style.aspectRatio = "1";
+  container.style.flexGrow = "1";
+  container.style.minWidth = "30%";
 
   let obj = {};
   let posObj = {};
@@ -117,7 +118,7 @@ var fillGrid = (arr, n) => {
 };
 
 var resetGame = () => {
-  inp.value = 2;
+  inpt.value = 2;
   generate();
   counter.innerText = c = 0;
   document.querySelector(".winner-section").classList.add("d-none");
@@ -129,8 +130,8 @@ inp.addEventListener("click", (e) => {
   try {
     isValid(m);
     if (m < 2) m = inpt.value = 2;
-    else if ((m & 1) != 0) inpt.value = --m;
     else if (m > 10) m = inpt.value = 10;
+    else if ((m & 1) != 0) inpt.value = --m;
     generate(m);
   } catch (error) {
     inpt.value = 2;

@@ -8,40 +8,37 @@
   </head>
 
   <body>
-    <div class="parent-container">
-      <h1>Welcome to Guessing the number pair challenge!</h1>
-
-      <div id="inp">
-        <div style="width: 50%">
-          <div class="inp-btn">
-            <div style="padding-right: 5px">
-              Grid Size: <input type="text" value="2" id="inpt" />
-            </div>
-            <div><button class="btn-submit">Done</button></div>
+    <h1>Welcome to Guessing the number pair challenge!</h1>
+    <div id="inp">
+      <div style="width: 50%">
+        <div class="inp-btn">
+          <div style="padding-right: 5px">
+            Grid Size: <input type="text" value="2" id="inpt" />
           </div>
-          <div style="color: red; font-size: 0.75rem; text-align: center">
-            (Must be an even number between 2 to 10)
-          </div>
+          <div><button class="btn-submit">Done</button></div>
         </div>
-        <div style="padding-top: 10px; font-size: larger">
-          Total Steps:
-          <span id="steps-count" style="font-weight: bolder">0</span>
+        <div style="color: red; font-size: 0.75rem; text-align: center">
+          (Must be an even number between 2 to 10)
         </div>
       </div>
-      <div id="grid-container"></div>
-      <div
-        class="winner-section d-none"
-        style="
-          font-size: xx-large;
-          text-align: center;
-          font-weight: bold;
-          padding-bottom: 10px;
-        "
-      >
-        You win!
+      <div style="padding-top: 10px; font-size: larger">
+        Total Steps:
+        <span id="steps-count" style="font-weight: bolder">0</span>
       </div>
-      <button class="btn">Reset</button>
     </div>
+    <div id="grid-container"></div>
+    <div
+      class="winner-section d-none"
+      style="
+        font-size: xx-large;
+        text-align: center;
+        font-weight: bold;
+        padding-bottom: 10px;
+      "
+    >
+      You win!
+    </div>
+    <button class="btn">Reset</button>
     <footer>
       Designed and developed by Rishabh Kumar Sharma | All Rights Reserved ©2024
     </footer>
