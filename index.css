@@ -9,6 +9,7 @@ body {
   display: flex; /* Set display to flex on body */
   flex-direction: column; /* Align children in a column */
   height: 100vh; /* Make body full height of the viewport */
+  width: 100vw;
   align-items: center;
 }
 
@@ -35,7 +36,6 @@ body {
 
 h1 {
   text-align: center;
-  /* padding: 2px; */
 }
 
 #inp {

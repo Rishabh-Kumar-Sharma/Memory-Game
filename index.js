@@ -44,10 +44,11 @@ var fillGrid = (arr, n) => {
   container.style.display = "grid";
   container.style.gridTemplateRows = `repeat(${n},auto)`;
   container.style.gridTemplateColumns = `repeat(${n},auto)`;
-  container.style.gap = "2px";
   container.style.aspectRatio = "1";
   container.style.flexGrow = "1";
   container.style.width = "auto";
+  container.style.justifyItems = "center";
+  container.style.alignItems = "center";
 
   let obj = {};
   let posObj = {};
@@ -71,6 +72,8 @@ var fillGrid = (arr, n) => {
       box.className = "box-initial";
       box.classList.add("box");
       box.style.aspectRatio = "1";
+      // box.style.padding = "5px";
+      box.style.width = "80%";
 
       box.addEventListener("click", () => {
         if (selected.length == 2 || selected.includes(box)) return;
