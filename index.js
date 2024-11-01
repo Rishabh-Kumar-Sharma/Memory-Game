@@ -13,6 +13,10 @@ var shuffle = (arr) => {
 };
 
 var generate = (m = 2) => {
+  if (!sessionStorage.getItem("grid-size"))
+    sessionStorage.setItem("grid-size", 2);
+  m = parseInt(sessionStorage.getItem("grid-size"));
+  inpt.value = m;
   let arr = [];
   let n = m * m; // grid size will be m x m
   let x = n >> 1; // possible numbers will be from 1 to n/2, each will
@@ -35,12 +39,17 @@ var container = document.getElementById("grid-container");
 var inp = document.querySelector(".btn-submit");
 let counter = document.querySelector("#steps-count");
 let parent = document.querySelector(".parent-container");
-let inpt = document.querySelector("#inpt");
+var inpt = document.querySelector("#inpt");
+let pairsCompleted = document.querySelector("#pairs-completed");
+let pairsLeft = document.querySelector("#pairs-left");
 
 var c = 0;
 
 var fillGrid = (arr, n) => {
   container.innerHTML = "";
+  let pairs = (n * n) >> 1;
+  pairsCompleted.innerText = 0;
+  pairsLeft.innerText = pairs;
   container.style.display = "grid";
   container.style.gridTemplateRows = `repeat(${n},auto)`;
   container.style.gridTemplateColumns = `repeat(${n},auto)`;
@@ -49,6 +58,8 @@ var fillGrid = (arr, n) => {
   container.style.width = "auto";
   container.style.justifyItems = "center";
   container.style.alignItems = "center";
+  pairsCompleted.innerText = 0;
+  pairsLeft.innerText = pairs;
 
   let obj = {};
   let posObj = {};
@@ -72,7 +83,6 @@ var fillGrid = (arr, n) => {
       box.className = "box-initial";
       box.classList.add("box");
       box.style.aspectRatio = "1";
-      // box.style.padding = "5px";
       box.style.width = "80%";
 
       box.addEventListener("click", () => {
@@ -96,6 +106,8 @@ var fillGrid = (arr, n) => {
             });
             delete obj[selected.pop().innerText];
             selected = [];
+            pairsCompleted.innerText++;
+            pairsLeft.innerText--;
           }
           // player wins
           if (Object.keys(obj).length <= 1) {
@@ -109,6 +121,8 @@ var fillGrid = (arr, n) => {
                 ""
               );
             }
+            pairsLeft.innerText--;
+            pairsCompleted.innerText++;
           }
         }
       });
@@ -118,7 +132,6 @@ var fillGrid = (arr, n) => {
 };
 
 var resetGame = () => {
-  inpt.value = 2;
   generate();
   counter.innerText = c = 0;
   document.querySelector(".winner-section").classList.add("d-none");
@@ -133,6 +146,7 @@ inp.addEventListener("click", (e) => {
     if (m < 2) m = inpt.value = 2;
     else if (m > 10) m = inpt.value = 10;
     else if ((m & 1) != 0) inpt.value = --m;
+    sessionStorage.setItem("grid-size", m);
     generate(m);
   } catch (error) {
     inpt.value = 2;

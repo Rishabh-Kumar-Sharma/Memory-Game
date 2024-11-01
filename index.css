@@ -47,7 +47,8 @@ h1 {
 }
 
 .d-none {
-  display: none;
+  /* display: none; */
+  visibility: hidden;
 }
 
 .btn {
