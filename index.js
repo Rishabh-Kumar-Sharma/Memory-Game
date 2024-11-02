@@ -35,6 +35,51 @@ var changeClass = (box, initialClass, finalClass) => {
   if (finalClass != "") box.classList.add(finalClass);
 };
 
+var handleBoxClick = (box) => {
+  if (
+    selected.length == 2 ||
+    selected.includes(box) ||
+    selectedPairs.has(parseInt(box.innerText))
+  )
+    return;
+  counter.innerText = ++c;
+  changeClass(box, "box-initial", "box-click");
+  selected.push(box);
+  if (selected.length == 2) {
+    if (parseInt(selected[0].innerText) != parseInt(selected[1].innerText)) {
+      setTimeout(() => {
+        while (selected.length > 0) {
+          let currSel = selected.pop();
+          changeClass(currSel, "box-click", "box-initial");
+        }
+      }, 2000);
+    } else {
+      let key = selected[0].innerText;
+      selectedPairs.add(parseInt(key));
+      while (selected.length > 0) {
+        let curr = selected.pop();
+        changeClass(curr, "box-click", "box-correct");
+        curr.removeEventListener("click", () => handleBoxClick(box));
+      }
+      delete obj[key];
+      selected = [];
+      pairsCompleted.innerText++;
+      pairsLeft.innerText--;
+    }
+    // player wins
+    if (Object.keys(obj).length <= 1) {
+      for (let key in obj) {
+        posObj[key].forEach((box) => {
+          changeClass(box, "box-click", "box-correct");
+        });
+        changeClass(document.querySelector(".winner-section"), "d-none", "");
+      }
+      pairsLeft.innerText--;
+      pairsCompleted.innerText++;
+    }
+  }
+};
+
 var container = document.getElementById("grid-container");
 var inp = document.querySelector(".btn-submit");
 let counter = document.querySelector("#steps-count");
@@ -42,6 +87,10 @@ let parent = document.querySelector(".parent-container");
 var inpt = document.querySelector("#inpt");
 let pairsCompleted = document.querySelector("#pairs-completed");
 let pairsLeft = document.querySelector("#pairs-left");
+var obj;
+var posObj;
+var selected;
+var selectedPairs;
 
 var c = 0;
 
@@ -61,9 +110,10 @@ var fillGrid = (arr, n) => {
   pairsCompleted.innerText = 0;
   pairsLeft.innerText = pairs;
 
-  let obj = {};
-  let posObj = {};
-  let selected = [];
+  obj = {};
+  posObj = {};
+  selected = [];
+  selectedPairs = new Set();
   c = 0;
 
   for (let i = 0; i < n; i++) {
@@ -84,48 +134,7 @@ var fillGrid = (arr, n) => {
       box.classList.add("box");
       box.style.aspectRatio = "1";
       box.style.width = "80%";
-
-      box.addEventListener("click", () => {
-        if (selected.length == 2 || selected.includes(box)) return;
-        counter.innerText = ++c;
-        changeClass(box, "box-initial", "box-click");
-        selected.push(box);
-        if (selected.length == 2) {
-          if (
-            parseInt(selected[0].innerText) != parseInt(selected[1].innerText)
-          ) {
-            setTimeout(() => {
-              while (selected.length > 0) {
-                let currSel = selected.pop();
-                changeClass(currSel, "box-click", "box-initial");
-              }
-            }, 2000);
-          } else {
-            selected.forEach((box) => {
-              changeClass(box, "box-click", "box-correct");
-            });
-            delete obj[selected.pop().innerText];
-            selected = [];
-            pairsCompleted.innerText++;
-            pairsLeft.innerText--;
-          }
-          // player wins
-          if (Object.keys(obj).length <= 1) {
-            for (let key in obj) {
-              posObj[key].forEach((box) => {
-                changeClass(box, "box-click", "box-correct");
-              });
-              changeClass(
-                document.querySelector(".winner-section"),
-                "d-none",
-                ""
-              );
-            }
-            pairsLeft.innerText--;
-            pairsCompleted.innerText++;
-          }
-        }
-      });
+      box.addEventListener("click", () => handleBoxClick(box));
       container.appendChild(box);
     }
   }
